@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз Погоды</title>
+</head>
+<body>
+    <h1>Прогноз Погоды</h1>
+    <form method="POST">
+        <label for="city">Введите название города:</label>
+        <input type="text" name="city" id="city" required>
+        <button type="submit">Получить погоду</button>
+    </form>
+
+    {% if weather_data is none %}
+        <h2>Город не найден</h2>
+    {% else %}
+        <h2>Прогноз погоды для {{ city }}:</h2>
+        <table border="1">
+            <tr>
+                <th>Время</th>
+                <th>Температура (°C)</th>
+            </tr>
+            {% for time, temp in weather_data.items() %}
+                <tr>
+                    <td>{{ time }}</td>
+                    <td>{{ temp }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
